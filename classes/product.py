@@ -43,3 +43,6 @@ class Product:
     def to_row(self):
         """Turns product to row for display in tkinter"""
         return [getattr(self, key) for key in self.to_row_cols]
+
+    def scrape(self) -> None:
+        """PLACEHOLDER. REASSIGN"""

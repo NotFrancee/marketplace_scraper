@@ -24,8 +24,9 @@ class SubitoProduct(Product):
 
     def scrape_description(self, content: BeautifulSoup):
         """Scrapes the description of the product"""
+        print(content.select('[class*="grid_description"]'))
         description_box = content.select('[class*="grid_description"]')[0]
-
+        print(description_box)
         description = description_box.find("p").text
 
         return description
