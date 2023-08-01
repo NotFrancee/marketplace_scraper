@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from product import Product
+from classes.product import Product
 
 DAYS_THRESHOLD = 5
 DEFAULT_BS4_SETTINGS = {"features": "lxml"}
@@ -42,6 +42,17 @@ class Scraper:
         self.scraped_products = self.scraped_products | products
 
         return self.scraped_products
+
+    def refresh_listings_data(self):
+        """Refreshes listings data"""
+        for listing in self.scraped_products.values():
+            if listing is None:
+                continue
+
+            if self.should_skip(listing):
+                continue
+
+            listing.scrape()
 
     def process_listings_page(self, content: BeautifulSoup) -> dict[str, Product]:
         """PLACEHOLDER FUNCTION"""
