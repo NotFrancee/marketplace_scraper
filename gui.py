@@ -27,7 +27,7 @@ layout = [
 
 
 # Create the window
-window = sg.Window("Demo", layout)
+window = sg.Window("Marketplace Scraper", layout)
 
 
 # Create an event loop
