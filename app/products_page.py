@@ -3,6 +3,8 @@
 import PySimpleGUI as sg
 from classes.product import Product
 
+sort_options = ["price ascending", "price descending", "a-z", "z-a"]
+
 
 class ProductsPage:
     """Products page"""
@@ -11,9 +13,21 @@ class ProductsPage:
         self.products = products
 
         self.filter_layout = [
-            sg.Text("Filter by Website"),
-            sg.Combo(values=websites, key="-FILTER-WEBSITE-", default_value="Subito"),
-            sg.Button("Filter", key="-FILTER-BTN-"),
+            [
+                sg.Text("Filter by Website"),
+                sg.Combo(
+                    values=websites, key="-FILTER-WEBSITE-", default_value="Subito"
+                ),
+                sg.Button("Filter", key="-FILTER-BTN-"),
+            ],
+            [
+                sg.Text("Sort by: "),
+                sg.Combo(
+                    values=sort_options,
+                    key="-SORT-CRITERIA-",
+                    default_value=sort_options[0],
+                ),
+            ],
         ]
 
         self._initialize_layout(products)
@@ -50,7 +64,12 @@ class ProductsPage:
         filtered_products = [
             product
             for product in self.products
-            if filter_value.lower() in product.website.lower()
+            if (filter_value.lower() in product.website.lower())
         ]
 
         self.udpate_listings_table(window, filtered_products)
+
+    def sort_products(self, window_: sg.Window, criteria: str):
+        """Sort the products based on a criteria"""
+
+        return
