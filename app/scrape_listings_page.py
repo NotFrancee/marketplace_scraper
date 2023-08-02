@@ -20,10 +20,7 @@ class ScrapeListingsPage:
         [sg.Button("Run query", key="-SEARCH-SUBMIT-")],
     ]
 
-    def __init__(self) -> None:
-        pass
-
-    def handle_submit(self, values: dict[str, str]):
+    def scrape_listings(self, values: dict[str, str]):
         """Creates the scraper and scrapes the website"""
         query = values["-SEARCH-QUERY-"]
         website = values["-SEARCH-WEBSITE-"]
@@ -31,6 +28,8 @@ class ScrapeListingsPage:
         if website == "Subito":
             scraper = SubitoScraper(query)
 
-            scraper.get_listings()
+            listings = scraper.get_listings()
+            return listings
+
         else:
             print("not implemented yet")

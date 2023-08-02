@@ -32,7 +32,7 @@ class Scraper:
 
         return False
 
-    def get_listings(self):
+    def get_listings(self) -> list[Product]:
         """Scrapes all listings from the last page of the query (TODO not just the last page)"""
 
         logging.info("getting all the recent listings...")
@@ -45,7 +45,7 @@ class Scraper:
 
         logging.info("...done!")
 
-        return self.scraped_products
+        return list(self.scraped_products.values())
 
     def process_listings_page(self, content: BeautifulSoup) -> dict[str, Product]:
         """PLACEHOLDER FUNCTION"""

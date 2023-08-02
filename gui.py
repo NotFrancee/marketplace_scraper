@@ -44,7 +44,8 @@ while True:
         break
 
     if event == "-SEARCH-SUBMIT-":
-        scrape_listings_page.handle_submit(values)
+        listings = scrape_listings_page.scrape_listings(values)
+        products_page.udpate_listings_table(window, listings)
 
     if event == "-FILTER-BTN-":
         products_page.filter_products(window, values["-FILTER-WEBSITE-"])
