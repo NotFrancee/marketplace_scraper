@@ -1,15 +1,15 @@
+"""Generic Scraper Class"""
+
+import logging
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from classes.product import Product
-import logging
-
-DAYS_THRESHOLD = 5
-DEFAULT_BS4_SETTINGS = {"features": "lxml"}
+from utils.default_settings import DEFAULT_BS4_SETTINGS, DAYS_THRESHOLD
 
 
 class Scraper:
-    """Base Scraper class"""
+    """Generic Scraper class"""
 
     def __init__(self, url_template: str, query: str, product_class: Product) -> None:
         query_formatted = query.replace(" ", "+")

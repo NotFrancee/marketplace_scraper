@@ -1,8 +1,10 @@
+"""Generic Product Class"""
+
 from datetime import datetime
 
 
 class Product:
-    """Base Product Class"""
+    """Generic Product Class"""
 
     to_row_cols = {
         "name": "Name",

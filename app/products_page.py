@@ -1,3 +1,5 @@
+"""Products Page"""
+
 import PySimpleGUI as sg
 from classes.product import Product
 

@@ -1,3 +1,5 @@
+"""Page to initiate listings searches"""
+
 import PySimpleGUI as sg
 from scrapers.subito_scraper import SubitoScraper
 

@@ -1,8 +1,10 @@
+"""Scraper for subito.it"""
+
 import requests
 from bs4 import BeautifulSoup, Tag
 from classes.product import Product
 from classes.scraper import Scraper
-import logging
+from utils.default_settings import DEFAULT_BS4_SETTINGS
 
 
 class SubitoProduct(Product):
@@ -36,7 +38,7 @@ class SubitoProduct(Product):
         url = self.link
 
         res = requests.get(url, timeout=10)
-        content = BeautifulSoup(res.content)
+        content = BeautifulSoup(res.content, **DEFAULT_BS4_SETTINGS)
 
         description = self.scrape_description(content)
         is_sold = self.scrape_is_sold(content)

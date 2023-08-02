@@ -1,8 +1,10 @@
+"""Main GUI"""
+
 import PySimpleGUI as sg
 from utils.test_products import init_products
+from utils.logger import initialize_logger
 from app.scrape_listings_page import ScrapeListingsPage
 from app.products_page import ProductsPage
-from utils.logger import initialize_logger
 
 products = init_products()
 initialize_logger()
