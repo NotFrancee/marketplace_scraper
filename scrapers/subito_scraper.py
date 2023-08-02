@@ -1,5 +1,4 @@
 import requests
-import pandas as pd
 from bs4 import BeautifulSoup, Tag
 from classes.product import Product
 from classes.scraper import Scraper

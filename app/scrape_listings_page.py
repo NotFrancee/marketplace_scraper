@@ -29,6 +29,6 @@ class ScrapeListingsPage:
         if website == "Subito":
             scraper = SubitoScraper(query)
 
-            scraper.scrape_listings()
+            scraper.get_listings()
         else:
             print("not implemented yet")

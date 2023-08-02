@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from product import Product
+from classes.product import Product
 
 DAYS_THRESHOLD = 5
 DEFAULT_BS4_SETTINGS = {"features": "lxml"}
