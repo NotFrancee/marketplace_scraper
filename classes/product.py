@@ -1,6 +1,7 @@
 """Generic Product Class"""
 
-from datetime import datetime
+import pandas as pd
+from utils.default_settings import DAYS_THRESHOLD
 
 
 class Product:
@@ -23,8 +24,20 @@ class Product:
         # later scrape automatically
         self.description = ""
         self.is_sold = False
-        self.last_updated = datetime.now()
+        self.last_updated = None
         self.website = website
+
+    def should_skip(self):
+        """Checks if the product has already been scraped and skips it in that case"""
+        last_update = self.last_updated
+
+        if last_update is not None:
+            days_since_last_update = pd.Timestamp.today() - last_update
+
+            if days_since_last_update.days < DAYS_THRESHOLD:
+                return True
+
+        return False
 
     def __str__(self) -> str:
         res = []

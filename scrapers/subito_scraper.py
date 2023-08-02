@@ -1,5 +1,7 @@
 """Scraper for subito.it"""
 
+import logging
+from datetime import datetime
 import requests
 from bs4 import BeautifulSoup, Tag
 from classes.product import Product
@@ -18,7 +20,6 @@ class SubitoProduct(Product):
         try:
             status_box = content.select("[class*=transaction-status-container]")[0]
 
-            print("is_sold function", status_box.text)
             if status_box.text:
                 return True
         except IndexError:
@@ -35,6 +36,10 @@ class SubitoProduct(Product):
     def scrape(self):
         """Scrapes all the data about the product"""
 
+        if self.should_skip():
+            logging.info("skipped")
+            return
+
         url = self.link
 
         res = requests.get(url, timeout=10)
@@ -45,6 +50,8 @@ class SubitoProduct(Product):
 
         self.description = description
         self.is_sold = is_sold
+
+        self.last_updated = datetime.today()
 
         return description, is_sold
 
@@ -65,8 +72,15 @@ class SubitoScraper(Scraper):
             price = container.find("p").text
             link = container.find("a").attrs["href"]
 
-            product = SubitoProduct(name, price, link)
+            if link in self.scraped_products:
+                product = self.scraped_products[link]
+                logging.info("product already existed, so using the stored version")
+            else:
+                product = SubitoProduct(name, price, link)
+                logging.info("created product. now proceding to scrape")
+
             product.scrape()
+            logging.info("scraped")
             products[link] = product
 
         return products
