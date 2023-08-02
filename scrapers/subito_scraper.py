@@ -66,6 +66,7 @@ class SubitoScraper(Scraper):
             link = container.find("a").attrs["href"]
 
             product = SubitoProduct(name, price, link)
+            product.scrape()
             products[link] = product
 
         return products
