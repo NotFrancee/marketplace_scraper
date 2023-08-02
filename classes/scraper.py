@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from classes.product import Product
+import logging
 
 DAYS_THRESHOLD = 5
 DEFAULT_BS4_SETTINGS = {"features": "lxml"}
@@ -34,6 +35,7 @@ class Scraper:
     def get_listings(self):
         """Scrapes all listings from the last page of the query (TODO not just the last page)"""
 
+        logging.info("getting all the recent listings...")
         res = requests.get(self.url, timeout=10)
         content = BeautifulSoup(res.content, **DEFAULT_BS4_SETTINGS)
 
@@ -41,8 +43,10 @@ class Scraper:
 
         self.scraped_products = self.scraped_products | products
 
+        logging.info("...done!")
+
         return self.scraped_products
 
     def process_listings_page(self, content: BeautifulSoup) -> dict[str, Product]:
         """PLACEHOLDER FUNCTION"""
-        return {}
+        return {"content": content}

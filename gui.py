@@ -2,8 +2,10 @@ import PySimpleGUI as sg
 from utils.test_products import init_products
 from app.scrape_listings_page import ScrapeListingsPage
 from app.products_page import ProductsPage
+from utils.logger import initialize_logger
 
 products = init_products()
+initialize_logger()
 
 scrape_listings_page = ScrapeListingsPage()
 products_page = ProductsPage(products, ("Subito", "Leboncoin"))

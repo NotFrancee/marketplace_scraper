@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup, Tag
 from classes.product import Product
 from classes.scraper import Scraper
+import logging
 
 
 class SubitoProduct(Product):
@@ -52,8 +53,6 @@ class SubitoScraper(Scraper):
     def __init__(self, query: str) -> None:
         url_template = "https://www.subito.it/annunci-italia/vendita/fotografia/?q={}"
         super().__init__(url_template, query, SubitoProduct)
-
-        self.products = dict()
 
     def process_listings_page(self, content: BeautifulSoup):
         containers: list[Tag] = content.find_all(attrs={"class": "item-card"})
