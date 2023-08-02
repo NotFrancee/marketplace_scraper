@@ -52,9 +52,9 @@ class SubitoProduct(Product):
 class SubitoScraper(Scraper):
     """Scraper for subito.it"""
 
-    def __init__(self, query: str) -> None:
+    def __init__(self, query: str, load_saved_data: bool) -> None:
         url_template = "https://www.subito.it/annunci-italia/vendita/fotografia/?q={}"
-        super().__init__(url_template, query, SubitoProduct)
+        super().__init__(url_template, query, SubitoProduct, "subito", load_saved_data)
 
     def process_listings_page(self, content: BeautifulSoup):
         containers: list[Tag] = content.find_all(attrs={"class": "item-card"})
